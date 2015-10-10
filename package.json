@@ -1,0 +1,36 @@
+{
+  "name": "win-win",
+  "description": "isomorphic win-win with react14, redux, router",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git://github.com/eriqbre/win-win",
+  "scripts": {
+    "start": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
+    "dev": "npm run start & webpack-dev-server --progress --color",
+    "build": "NODE_ENV=production webpack --progress --color -p --config webpack.prod.config.js"
+  },
+  "author": "eriq breland <eriqbre@gmail.com>",
+  "dependencies": {
+    "axios": "^0.7.0",
+    "express": "^4.13.3",
+    "history": "^1.12.4",
+    "immutable": "^3.7.5",
+    "object-assign": "^4.0.1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-redux": "^3.1.0",
+    "react-router": "^1.0.0-rc3",
+    "redux": "^3.0.2"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.25",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^5.3.2",
+    "eslint": "^1.6.0",
+    "eslint-plugin-react": "^3.5.1",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  }
+}
