@@ -10,6 +10,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import * as reducers from '../shared/reducers';
 import { fromJS } from 'immutable';
+import configureStore from '../shared/store';
 
 const history = createBrowserHistory();
 let initialState = window.__INITIAL_STATE__;
@@ -20,6 +21,7 @@ Object.keys(initialState).forEach(key => {
 });
 
 const reducer = combineReducers(reducers);
+//const store = configureStore(reducer, initialState);
 const store = createStore(reducer, initialState);
 
 ReactDOM.render(
