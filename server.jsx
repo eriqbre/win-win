@@ -8,15 +8,15 @@ import { RoutingContext, match } from 'react-router';
 import routes from './shared/routes';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import * as reducers from './shared/reducers';
+import configureStore from './shared/store/configureStore';
 
 const app = express();
 
 app.use((request, response) => {
-   const reducer = combineReducers(reducers);
-   const store = createStore(reducer);
+   const store = configureStore();
 
    match({routes, location: request.url}, (error, redirectLocation, renderProps) => {
+      //region handle errors
       if (error) {
          console.error(error);
          return response.status(500).end('internal server error');
@@ -25,7 +25,8 @@ app.use((request, response) => {
       if (!renderProps) {
          return response.status(404).end('page not found');
       }
-
+      //endregion
+      //region componse initial component and state
       const InitialComponent = (
          <Provider store={store}>
             <RoutingContext {...renderProps} />
@@ -33,6 +34,8 @@ app.use((request, response) => {
       );
       const initialState = store.getState();
       const componentHTML = ReactDOMServer.renderToString(InitialComponent);
+      //endregion
+      //region html
       const HTML = `
           <!DOCTYPE html>
           <html>
@@ -49,6 +52,7 @@ app.use((request, response) => {
             </body>
         </html>
       `;
+      //endregion
 
       response.end(HTML);
    })
