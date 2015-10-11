@@ -2,15 +2,14 @@
  * Created by eriq on 10/10/15.
  */
 import * as constants from '../config/constants';
+import { createAction } from 'redux-actions';
 
-export function createTodo(text) {
-   return {type: constants.CREATE_TODO, text, date: Date.now()}
-}
+const createTodo = createAction(constants.CREATE_TODO);
+const editTodo = createAction(constants.EDIT_TODO);
+const deleteTodo = createAction(constants.DELETE_TODO);
 
-export function editTodo(id, text) {
-   return {type: constants.EDIT_TODO, id, text, date: Date.now()}
-}
-
-export function deleteTodo(id) {
-   return {type: constants.DELETE_TODO, id}
+export {
+   createTodo,
+   editTodo,
+   deleteTodo
 }

@@ -3,20 +3,33 @@
  */
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import createLogger from 'redux-logger';
-import thunk from 'redux-thunk';
-import promiseMiddleware from 'redux-promise-middleware';
+import promiseMiddleware from 'redux-promise';
 import * as reducers from '../reducers';
+import Immutable from 'immutable';
 
 const reducer = combineReducers(reducers);
-const logger = createLogger();
+const logger = createLogger({
+   duration: true,
+   transformer: (state) => {
+      // transform immutable objects back to json
+      var newState = {};
+      for (var i of Object.keys(state)) {
+         if (Immutable.Iterable.isIterable(state[i])) {
+            newState[i] = state[i].toJS();
+         } else {
+            newState[i] = state[i];
+         }
+      }
+      return newState;
+   }
+});
 const createStoreWithMiddleware = applyMiddleware(
+   promiseMiddleware,
    logger
 )(createStore);
 
 export default function configureStore(initialState) {
    const store = createStoreWithMiddleware(reducer, initialState);
-   //const store = createStore(reducer, initialState);
-
 
    if (module.hot) {
       // Enable Webpack hot module replacement for reducers

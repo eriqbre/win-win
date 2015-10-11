@@ -14,7 +14,7 @@ export default class TodosView extends React.Component {
       const val = this.props.todos.get(id).text;
 
       let newVal = window.prompt('', val);
-      this.props.editTodo(id, newVal);
+      this.props.editTodo({id: id, text: newVal});
    };
 
    render() {
