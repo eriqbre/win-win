@@ -3,11 +3,11 @@
  */
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import createLogger from 'redux-logger';
-import promiseMiddleware from 'redux-promise';
-import * as reducers from '../reducers';
+import promiseMiddleware from 'redux-simple-promise';
+import reducer from '../reducers';
 import Immutable from 'immutable';
 
-const reducer = combineReducers(reducers);
+//const reducer = combineReducers(reducers);
 const logger = createLogger({
    duration: true,
    transformer: (state) => {
@@ -24,7 +24,7 @@ const logger = createLogger({
    }
 });
 const createStoreWithMiddleware = applyMiddleware(
-   promiseMiddleware,
+   promiseMiddleware(),
    logger
 )(createStore);
 

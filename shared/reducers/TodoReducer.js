@@ -2,11 +2,12 @@
  * Created by eriq on 10/10/15.
  */
 import Immutable from 'immutable';
+import { handleActions } from 'redux-actions';
 import * as constants from '../config/constants';
 
 const defaultState = new Immutable.List();
 
-export default function todoReducer(state = defaultState, action = {type: ''}) {
+export default function TodoReducer(state = defaultState, action = {type: ''}) {
    switch (action.type) {
       case constants.CREATE_TODO:
          return state.concat(action.payload);

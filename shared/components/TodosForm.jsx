@@ -13,7 +13,7 @@ export default class TodosForm extends React.Component {
    render() {
       return (
          <div id="todo-form">
-            <input type="text" placeholder="type todo" ref="todo-input"/>
+            <input type="text" placeholder="type todo" ref="todo-input" defaultValue="test"/>
             <input type="submit" value="OK" onClick={this.handleSubmit}/>
          </div>
       );

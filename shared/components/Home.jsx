@@ -3,22 +3,28 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodosView from './TodosView';
-import TodosForm from './TodosForm';
 import { bindActionCreators } from 'redux';
 import * as TodoActions from '../actions/TodoActions';
+import * as loginActions from '../actions/loginActions';
 import { connect } from 'react-redux';
 
-@connect(state => ({todos: state.todos}))
+import TodosView from './TodosView';
+import TodosForm from './TodosForm';
+import LoginForm from './LoginForm';
+
+@connect(state => (state))
 export default
 class Home extends React.Component {
    render() {
-      const { todos, dispatch } = this.props;
+      const { todos, dispatch, account } = this.props;
+      //console.log('props', this.props);
+      //<LoginForm {...bindActionCreators(loginActions, dispatch)} />
 
       return (
          <div id="todo-list">
-            <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)} />
+            <LoginForm account={account} {...bindActionCreators(loginActions, dispatch)} />
             <TodosForm {...bindActionCreators(TodoActions, dispatch)} />
+            <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)} />
          </div>
       );
    }
