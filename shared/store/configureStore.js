@@ -1,11 +1,12 @@
 /**
  * Created by eriq on 10/10/15.
  */
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-simple-promise';
-import reducer from '../reducers';
 import Immutable from 'immutable';
+import { devTools, persistState } from 'redux-devtools';
+import reducer from '../reducers';
 
 //const reducer = combineReducers(reducers);
 const logger = createLogger({
@@ -23,10 +24,7 @@ const logger = createLogger({
       return newState;
    }
 });
-const createStoreWithMiddleware = applyMiddleware(
-   promiseMiddleware(),
-   logger
-)(createStore);
+const createStoreWithMiddleware = compose(applyMiddleware(promiseMiddleware(), logger), devTools())(createStore);
 
 export default function configureStore(initialState) {
    const store = createStoreWithMiddleware(reducer, initialState);

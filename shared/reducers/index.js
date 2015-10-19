@@ -2,6 +2,7 @@
  * Created by eriq on 10/10/15.
  *
  */
+
 import { combineReducers } from 'redux';
 import TodoReducer from './TodoReducer';
 import loginReducer from './loginReducer';
@@ -18,8 +19,7 @@ export default combineReducers({
    transactions: []
 });
 
-// this should be the shape of the complete store
-/*
+/* this should be the shape of the complete store
  const store = {
  errors: [],
  loaders: [],

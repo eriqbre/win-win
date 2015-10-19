@@ -3,7 +3,6 @@
  */
 import Immutable from 'immutable';
 import { LOGIN, LOGIN_RESOLVED } from '../config/constants';
-import { resolve, reject } from 'redux-simple-promise';
 import { handleActions } from 'redux-actions';
 
 const defaultState = Immutable.Map({
@@ -18,10 +17,7 @@ const defaultState = Immutable.Map({
 });
 
 const loginReducer = handleActions({
-   LOGIN: (state, action) => (Object.assign({}, state, {
-      meta: action.payload
-   })),
-   LOGIN_RESOLVED: (state, action) => (Object.assign({}, state, {
+   LOGIN_RESOLVED: (state, action) => (state.merge({
       userid: action.payload.userId,
       token: {
          value: action.payload.id,

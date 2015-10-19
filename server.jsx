@@ -9,6 +9,7 @@ import routes from './shared/routes';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import configureStore from './shared/store/configureStore';
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 const app = express();
 
@@ -28,9 +29,14 @@ app.use((request, response) => {
       //endregion
       //region componse initial component and state
       const InitialComponent = (
-         <Provider store={store}>
-            <RoutingContext {...renderProps} />
-         </Provider>
+         <div>
+            <Provider store={store}>
+               <RoutingContext {...renderProps} />
+            </Provider>
+            <DebugPanel top right bottom>
+               <DevTools store={store} monitor={LogMonitor}/>
+            </DebugPanel>
+         </div>
       );
       const initialState = store.getState();
       const componentHTML = ReactDOMServer.renderToString(InitialComponent);

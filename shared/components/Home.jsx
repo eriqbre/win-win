@@ -17,8 +17,6 @@ export default
 class Home extends React.Component {
    render() {
       const { todos, dispatch, account } = this.props;
-      //console.log('props', this.props);
-      //<LoginForm {...bindActionCreators(loginActions, dispatch)} />
 
       return (
          <div id="todo-list">

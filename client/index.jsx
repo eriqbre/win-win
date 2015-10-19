@@ -10,6 +10,8 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { fromJS } from 'immutable';
 import configureStore from '../shared/store/configureStore';
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+import DiffMonitor from 'redux-devtools-diff-monitor';
 
 const history = createBrowserHistory();
 let initialState = window.__INITIAL_STATE__;
@@ -22,8 +24,13 @@ Object.keys(initialState).forEach(key => {
 const store = configureStore(initialState);
 
 ReactDOM.render(
-   <Provider store={store}>
-      <Router children={routes} history={history}/>
-   </Provider>,
+   <div>
+      <Provider store={store}>
+         <Router children={routes} history={history}/>
+      </Provider>
+      <DebugPanel top right bottom>
+         <DevTools store={store} monitor={LogMonitor}/>
+      </DebugPanel>
+   </div>,
    document.getElementById('react-view')
 );
