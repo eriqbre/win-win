@@ -1,11 +1,10 @@
 /**
  * Created by eriq on 10/17/15.
  */
-import Immutable from 'immutable';
-import { LOGIN, LOGIN_RESOLVED } from '../config/constants';
+import { LOGIN_RESOLVED } from '../config/constants';
 import { handleActions } from 'redux-actions';
 
-const defaultState = Immutable.Map({
+const defaultState = {
    name: '',
    userid: '',
    id: '',
@@ -14,10 +13,10 @@ const defaultState = Immutable.Map({
       ttl: 0,
       created: ''
    }
-});
+};
 
 const loginReducer = handleActions({
-   LOGIN_RESOLVED: (state, action) => (state.merge({
+   LOGIN_RESOLVED: (state, action) => (Object.assign({}, state, {
       userid: action.payload.userId,
       token: {
          value: action.payload.id,

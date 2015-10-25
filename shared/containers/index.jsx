@@ -7,7 +7,7 @@ export default class App extends React.Component {
    render() {
       return (
          <div id="app-view">
-            <h1>WinWin</h1>
+            <h1>React Redux</h1>
             <hr/>
             {this.props.children}
          </div>

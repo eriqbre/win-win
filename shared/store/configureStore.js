@@ -4,27 +4,20 @@
 import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-simple-promise';
-import Immutable from 'immutable';
-import { devTools, persistState } from 'redux-devtools';
+import { persistState } from 'redux-devtools';
+import DevTools from '../components/DevTools';
 import reducer from '../reducers';
 
 //const reducer = combineReducers(reducers);
 const logger = createLogger({
-   duration: true,
-   transformer: (state) => {
-      // transform immutable objects back to json
-      var newState = {};
-      for (var i of Object.keys(state)) {
-         if (Immutable.Iterable.isIterable(state[i])) {
-            newState[i] = state[i].toJS();
-         } else {
-            newState[i] = state[i];
-         }
-      }
-      return newState;
-   }
+   duration: true
 });
-const createStoreWithMiddleware = compose(applyMiddleware(promiseMiddleware(), logger), devTools())(createStore);
+const createStoreWithMiddleware = compose(
+   applyMiddleware(
+      promiseMiddleware(),
+      logger),
+   DevTools.instrument()
+)(createStore);
 
 export default function configureStore(initialState) {
    const store = createStoreWithMiddleware(reducer, initialState);
