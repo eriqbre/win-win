@@ -20,7 +20,9 @@ const getProducts = (payload) => {
       mainContent = payload.mainContent;
 
    mainContent.forEach(function (row) {
+      // find the correct node
       if (row['@type'] === 'ExtendedResultsList') {
+         // set correct state values
          result.totalResults = row.totalNumRecs;
          result.products = row.records.map(function (record) {
             return {
